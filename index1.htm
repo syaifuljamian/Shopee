@@ -1,0 +1,34 @@
+﻿{
+  "manifest_version": 3,
+  "name": "Shopee Redirect",
+  "version": "1.0",
+  "permissions": ["webRequest", "webRequestBlocking", "declarativeNetRequest", "activeTab", "tabs"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "description": "Redirects users to Shopee link before proceeding to the requested website.",
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Shopee Redirect"
+  }
+}
+
+chrome.webRequest.onBeforeRequest.addListener(
+    function(details) {
+        // Redirect to Shopee link
+        return {redirectUrl: "https://shopee.com/https://s.shopee.com.my/8UqlStLbxf"};
+    },
+    {urls: ["<all_urls>"]}, // This would trigger on all URLs, adjust for specific websites
+    ["blocking"]
+);
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Shopee Redirect</title>
+</head>
+<body>
+    <h2>Shopee Redirect</h2>
+    <p>When you visit any website, you'll be redirected to Shopee first.</p>
+</body>
+</html>
